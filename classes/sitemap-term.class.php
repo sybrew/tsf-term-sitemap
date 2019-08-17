@@ -16,10 +16,9 @@ class My_TSF_Term_Sitemap extends \The_SEO_Framework\Builders\Sitemap {
 		$terms = \get_terms( $this->taxonomy, $_args );
 
 		$_items      = array_column( $terms, 'term_id' );
-		$total_items = count( $terms );
+		$total_items = count( $_items );
 
-		// 49998 = 50000-2, max sitemap items.
-		if ( $total_items > 49998 ) array_splice( $_items, 49998 );
+		if ( $total_items > 50000 ) array_splice( $_items, 50000 );
 
 		foreach ( $this->generate_url_item_values(
 			$_items,
