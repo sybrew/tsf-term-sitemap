@@ -21,6 +21,9 @@ function tsf_term_sitemap_adjust_list( $list ) {
 			'regex'    => "/^sitemap\-{$tax}\.xml/", // Don't add a $ at the end, for translation-plugin support.
 			'callback' => 'tsf_term_sitemap_output',
 			'robots'   => true,
+			'_args'    => [ // Prefix arbitrary arguments with an underscore for forward compatibility.
+				'taxonomy' => $tax,
+			],
 		];
 
 	return $list;
@@ -37,6 +40,9 @@ function tsf_term_sitemap_output( $sitemap_id ) {
 
 	// Pass this to the view. $sitemap_id is what you set in $list before.
 	$taxonomy = $sitemap_id;
+
+	// Alternatively, use '\The_SEO_Framework\Bridges\Sitemap::get_instance()->get_sitemap_endpoint_list()[$sitemap_id]'.
+	// It returns the arguments you've passed in filter 'the_seo_framework_sitemap_endpoint_list'; including arbitrary arguments.
 
 	include MY_TSF_CATEGORY_SITEMAP_BASE_DIR_PATH . 'views' . DIRECTORY_SEPARATOR . 'term-xml.php';
 	echo "\n";
